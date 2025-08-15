@@ -1,0 +1,24 @@
+body {
+    background-color: #FFBF78;
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    height: 10vh;
+}
+
+.header-logo {
+    height: 100%;
+    width: auto;
+}
+
+.main-nav {
+    height: 100%;
+}
+
+.main-nav ul {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
