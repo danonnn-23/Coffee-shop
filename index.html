@@ -12,17 +12,17 @@
 </head>
 <body>
     <header>
-        <div class="header-container">
+        <div id="home" class="header-container">
             <header class="main-header">
                 <img class="header-logo" src="./images/coffee shop logo.webp" alt="">
                 <nav class="main-nav">
                     <ul>
-                        <li>Home</li>
-                        <li>Blog</li>
-                        <li>About</li>
-                        <li>Feedback</li>
-                        <li>Contact</li>
-                        <li class="nav-btn-buyNow">Buy now</li>
+                        <li data-scroll="home">Home</li>
+                        <li data-scroll="blog">Blog</li>
+                        <li data-scroll="about">About</li>
+                        <li data-scroll="feedback">Feedback</li>
+                        <li data-scroll="contact">Contact</li>
+                        <li data-scroll="shop" class="nav-btn-buyNow">Buy now</li>
                     </ul>
                 </nav>
             </header>
@@ -33,11 +33,19 @@
             </div>
         </div>
     </header>
-    <div class="about-container">
-        <p class="about-p1">At our Coffee Shop we believe that good coffee can turn ordinary moments into special ones. That’s why we deliver freshly roasted beans straight to your home, so you can enjoy the taste of coziness every day.</p>
-        <img class="about-img1" src="./images/about_photo2.webp" alt="">
-        <img class="about-img2" src="./images/about_photo1.webp" alt="">
-        <p class="about-p2">Whether it’s an early morning boost or a slow evening ritual, our coffee is here to keep you company and bring warmth to your day.</p>
+    <div id="about" class="about-bg">
+        <div class="about-container">
+            <div class="about-1">
+                <h2>Freshly Roasted. Always Cozy</h2>
+                <p>At our Coffee Shop we believe that good coffee can turn ordinary moments into special ones. That’s why we deliver freshly roasted beans straight to your home, so you can enjoy the taste of coziness every day.</p>
+            </div>
+            <img class="about-img1" src="./images/about_photo2.webp" alt="">
+            <img class="about-img2" src="./images/about_photo1.webp" alt="">
+            <div class="about-2">
+                <h2>Your Daily Coffee Ritual</h2>
+                <p>Whether it’s an early morning boost or a slow evening ritual, our coffee is here to keep you company and bring warmth to your day.</p>
+            </div>
+        </div>
     </div>
     <script src="./js/main.js"></script>
 </body>
