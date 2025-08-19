@@ -315,6 +315,58 @@ const products = [
                         material: "Plastic, stainless steel"
                     }
                 ]
+            },
+            {
+                name: "Filter coffee",
+                supersubcategories: [
+                    {
+                        name: "Filter Paper",
+                        items: [
+                            {
+                                name: "V60 Filter Paper",
+                                description: "Special filter paper for V60 coffee maker.",
+                                price: 150,
+                                weight: "50g",
+                                type: "Cone-shaped",
+                                quantities: "40 sheets"
+                            },
+                            {
+                                name: "Chemex Filter Paper",
+                                description: "Thick filter paper for Chemex coffee maker.",
+                                price: 200,
+                                weight: "100g",
+                                type: "Square",
+                                quantities: "100 sheets"
+                            }
+                        ]
+                    },
+                    {
+                        name: "Pourover Devices",
+                        items: [
+                            {
+                                name: "Hario V60 02 plastic pourover white",
+                                description: "Ideal for home use!",
+                                price: 305,
+                                material: "plastic",
+                                volume: "1-4 cups"
+                            },
+                            {
+                                name: "Hario V60 Glass Set",
+                                description: "Hario V60 02 glass transparent set for brewing coffee using the pourover method. Perfect as a gift.",
+                                price: 1450,
+                                material: "Borosilicate glass, plastic",
+                                volume: "1-4 cups"
+                            },
+                            {
+                                name: "Hario Switch 02 glass pourover",
+                                description: "The Hario SWITCH pourover is a hybrid device that allows you to brew coffee like a regular V60 funnel or like an immersion Clever.",
+                                price: 1550,
+                                material: "Heat-resistant glass, plastic.",
+                                volume: "1-4 cups"
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     },
@@ -371,4 +423,157 @@ const products = [
             }
         ]
     }
-]
+];
+
+const reviews = [
+    {
+        name: "John Doe",
+        year: 2025,
+        month: 8,
+        day: 15,
+        hour: 10,
+        minute: 30,
+        rating: 5,
+        comment: "Great coffee! The Ethiopian Yirgacheffe is my favorite."
+    },
+    {
+        name: "Jane Smith",
+        year: 2025,
+        month: 8,
+        day: 18,
+        hour: 19,
+        minute: 32,
+        rating: 4,
+        comment: "Good selection of coffee accessories. The French Press works well."
+    },
+    {
+        name: "Alice Johnson",
+        year: 2025,
+        month: 8,
+        day: 10,
+        hour: 20,
+        minute: 13,
+        rating: 5,
+        comment: "I love the loose leaf tea collection, especially the Green Tea Sencha."
+    },
+    {
+        name: "Bob Brown",
+        year: 2025,
+        month: 8,
+        day: 12,
+        hour: 15,
+        minute: 45,
+        rating: 3,
+        comment: "The coffee was good, but the delivery took too long."
+    },
+    {
+        name: "Charlie Davis",
+        year: 2025,
+        month: 8,
+        day: 14,
+        hour: 9,
+        minute: 20,
+        rating: 4,
+        comment: "Great service and friendly staff. Will come back again!"
+    },
+    {
+        name: "Diana Evans",
+        year: 2025,
+        month: 8,
+        day: 16,
+        hour: 11,
+        minute: 5,
+        rating: 5,
+        comment: "The coffee grinder is excellent! Makes perfect ground coffee."
+    },
+    {
+        name: "Ethan Green",
+        year: 2025,
+        month: 8,
+        day: 17,
+        hour: 14,
+        minute: 25,
+        rating: 4,
+        comment: "Good quality coffee makers. The Aeropress is my new favorite."
+    },
+    {
+        name: "Fiona White",
+        year: 2025,
+        month: 8,
+        day: 19,
+        hour: 16,
+        minute: 10,
+        rating: 5,
+        comment: "I appreciate the variety of coffee beans. The Brazil Santos is amazing!"
+    },
+    {
+        name: "George Black",
+        year: 2025,
+        month: 8,
+        day: 20,
+        hour: 17,
+        minute: 55,
+        rating: 4,
+        comment: "The tea accessories are great. The teapot is beautiful and functional."
+    },
+    {
+        name: "Hannah Blue",
+        year: 2025,
+        month: 8,
+        day: 21,
+        hour: 18,
+        minute: 30,
+        rating: 5,
+        comment: "Fantastic selection of coffee and tea. The Chamomile tea is very calming."
+    }
+];
+
+const feedbackContainer = document.querySelector('.reviews');
+
+reviews.forEach(review => {
+    const reviewDiv = document.createElement('div');
+    reviewDiv.className = 'review';
+
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    const day = now.getDate();
+    const hour = now.getHours();
+    const minute = now.getMinutes();
+
+    let reviewTime = 0;
+    let reviewTimeIntoText = "";
+
+    if (year > review.year) {
+        reviewTime = year - review.year;
+        reviewTimeIntoText = reviewTime + " year(s) ago";
+    } else if (year === review.year && month > review.month) {
+        reviewTime = month - review.month; 
+        reviewTimeIntoText = reviewTime + " month(s) ago";
+    } else if (year === review.year && month === review.month && day > review.day) {
+        reviewTime = day - review.day; 
+        reviewTimeIntoText = reviewTime + " day(s) ago";
+    } else if (year === review.year && month === review.month && day === review.day && hour > review.hour) {
+        reviewTime = hour - review.hour; 
+        reviewTimeIntoText = reviewTime + " hour(s) ago";
+    } else if (year === review.year && month === review.month && day === review.day && hour === review.hour && minute > review.minute) {
+        reviewTime = minute - review.minute; 
+        reviewTimeIntoText = reviewTime + " minute(s) ago";
+    } else {
+        reviewTime = 0;
+        reviewTimeIntoText = "just now";
+    }
+
+    
+
+    reviewDiv.innerHTML = `
+        <div class="review-header">
+            <span class="review-name">${review.name}</span>
+            <span class="review-date">${reviewTimeIntoText}</span>
+            <span class="review-rating">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</span>
+        </div>
+        <div class="review-comment">${review.comment}</div>
+    `;
+    feedbackContainer.appendChild(reviewDiv);
+});
+
