@@ -201,24 +201,32 @@ body {
 }
 
 .reviews {
+    background-color: #33312c;
+    border-radius: 15px;
     width: 45%;
     margin: 5% 5% 5% 5%;
     height: 90%;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
 }
 
 .reviews::-webkit-scrollbar {
-      width: 8px;
+    width: 10px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: #58564f;
     }
-.reviews::-webkit-scrollbar-track {
-      background: transparent;
-    }
+
 .reviews::-webkit-scrollbar-thumb {
-      background: rgb(170, 163, 102);
-      border-radius: 4px;
-      transition: opacity 0.5s;
-      opacity: 1;
-      cursor: pointer;
+    border-top-right-radius: 13px;
+    border-bottom-right-radius: 13px;
+    background-color: rgb(173, 165, 93);
+    transition: opacity 0.5s;
+    opacity: 1;
+    cursor: pointer;
     }
 
 .feedback {
@@ -229,9 +237,111 @@ body {
 
 .review {
     width: 90%;
-    background-color: #302e2c;
-    border-radius: 10px;
-    padding: 1rem;
-    margin-bottom: 1rem;
+}
+
+.review-header {
     cursor: pointer;
+    display: grid;
+    grid-template-columns: 80px 1fr; /* ліва колонка під аватар, права - під текст */
+    grid-template-rows: auto auto 1fr; /* ім'я, дата, відгук */
+    grid-template-areas:
+    "avatar name rating"
+    "avatar date rating"
+    "avatar text text";
+    gap: 5px 10px;
+    background: #3a3a3a;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+/* Елементи по зонах */
+.avatar {
+    grid-area: avatar;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+}
+
+.review-name {
+    grid-area: name;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.review-date {
+    grid-area: date;
+    font-size: 0.9em;
+    color: #777;
+}
+
+.review-comment {
+    grid-area: text;
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+.review-rating {
+    grid-area: rating;
+    justify-self: end;
+    align-self: start;
+    font-size: 1.2em;
+    color: gold;
+}
+
+.review-rate {
+    display: flex;
+    gap: 5px;
+    font-size: 250%;
+}
+
+.star {
+    cursor: pointer;
+    color: gold;
+}
+
+.person-info {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}
+
+.text-form {
+    background-color: transparent;
+    color: rgb(182, 179, 152);
+    background-color: rgb(48, 28, 4, 0.3);
+    border: 1px solid rgb(48, 28, 4) !important;
+    border-radius: 4px; /* якщо хочеш скруглення */
+    box-shadow: none !important; /* прибирає синю підсвітку від bootstrap */
+}
+
+.text-form:focus {
+    color: rgb(182, 179, 152);
+    background-color: rgb(48, 28, 4, 0.6);
+}
+
+.text-form::placeholder {
+    color: rgb(182, 179, 152);
+    opacity: 0.7; /* робить текст трохи прозорим */
+}
+
+.btn-submit {
+    background-color: rgb(73, 49, 26);
+    border-color: rgb(44, 29, 16);
+}
+
+.btn-submit:hover {
+    background-color: rgb(53, 37, 14);
+    border-color: rgb(33, 23, 10);
+}
+
+
+.form-label {
+    font-size: 150%;
+}
+
+.label-rate {
+    margin: 0px;
 }
