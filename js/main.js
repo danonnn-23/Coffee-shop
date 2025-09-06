@@ -8,7 +8,7 @@ document.querySelectorAll('[data-scroll]').forEach(item => {
   });
 });
 
-const products = [
+let products = [
     {
         category: "Coffee",
         subcategories: [
@@ -425,7 +425,7 @@ const products = [
     }
 ];
 
-const reviews = [
+let reviews = [
     {
         name: "John Doe",
         year: 2025,
@@ -584,34 +584,127 @@ reviews.forEach(review => {
 });
 
 const stars = document.querySelectorAll(".star");
+let selectedRating = 0;
 
 stars.forEach((star, index) => {
   star.addEventListener("click", () => {
     const rating = index + 1; // бо індекс з 0
     stars.forEach((s, i) => {
       s.textContent = i < rating ? "★" : "☆";
+    selectedRating = rating;
     });
   });
 });
 
 const commentText = document.getElementById("exampleFormControlTextarea1");
 const counter = document.getElementById("counter");
-const maxLength = textarea.getAttribute("maxlength");
+const maxLength = commentText.getAttribute("maxlength");
 
 commentText.addEventListener("input", () => {
     const currentLength = commentText.value.length;
     counter.textContent = `${currentLength} / ${maxLength}`;
 });
 
-const nameInput = document.querySelector('.person-info .name input');
-const surnameInput = document.querySelector('.person-info .surname input');
-const rateStars = document.querySelectorAll('.review-rate .star');
-
+const nameInput = document.querySelector('.name_form');
+const surnameInput = document.querySelector('.surname_form');
 const submitButton = document.querySelector('.btn-submit');
 
 submitButton.addEventListener('click', () => {
-    if (nameInput.value.length === 0 || surnameInput.value.length === 0) {
-        alert('Please enter your name and surname.');
-        return;
+    if (nameInput.value.trim() === '') {
+        alert('Please enter your name');
+    } else if (surnameInput.value.trim() === '') {
+        alert('Please enter your surname');
+    } else if (selectedRating === 0) {
+        alert('Please select a rating');
+    } else {
+        const now = new Date();
+        const newReview = {
+            name: nameInput.value.trim() + " " + surnameInput.value.trim(),
+            year: now.getFullYear(),
+            month: now.getMonth() + 1,
+            day: now.getDate(),
+            hour: now.getHours(),
+            minute: now.getMinutes(),
+            rating: selectedRating,
+            comment: commentText.value.trim()
+        };
+        reviews.push(newReview);
+        renderReview(newReview); // додаємо на сторінку **без очищення старих**
+        alert('Thank you for your review!');
+
+        // ---- очищаємо форму ----
+        nameInput.value = '';
+        surnameInput.value = '';
+        commentText.value = '';
+        selectedRating = 0;
+
+        // повертаємо всі зірки в початковий стан
+        stars.forEach(star => star.textContent = '☆');
+
+        // обнуляємо лічильник символів
+        counter.textContent = `0 / ${commentText.getAttribute("maxlength")}`;
     }
+});
+
+
+function renderReview(review) {
+    const reviewDiv = document.createElement('div');
+    reviewDiv.className = 'review';
+
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    const day = now.getDate();
+    const hour = now.getHours();
+    const minute = now.getMinutes();
+
+    // Розрахунок "x time ago" — можна спростити, як ти робив
+    let reviewTimeIntoText = "just now"; // для спрощення
+
+    const svgColors = ["#b49459ff", "#8295a1ff", "#312400ff", "#5a6145ff", "#e9c46a", "#d1d1d1ff"];
+    function getRandomColor() {
+        return svgColors[Math.floor(Math.random() * svgColors.length)];
+    }
+
+    reviewDiv.innerHTML = `
+        <div class="review-header">
+            <svg class="avatar" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6.02958 19.4012C5.97501 19.9508 6.3763 20.4405 6.92589 20.4951C7.47547 20.5497 7.96523 20.1484 8.01979 19.5988L6.02958 19.4012ZM15.9802 19.5988C16.0348 20.1484 16.5245 20.5497 17.0741 20.4951C17.6237 20.4405 18.025 19.9508 17.9704 19.4012L15.9802 19.5988ZM20 12C20 16.4183 16.4183 20 12 20V22C17.5228 22 22 17.5228 22 12H20ZM12 20C7.58172 20 4 16.4183 4 12H2C2 17.5228 6.47715 22 12 22V20ZM4 12C4 7.58172 7.58172 4 12 4V2C6.47715 2 2 6.47715 2 12H4ZM12 4C16.4183 4 20 7.58172 20 12H22C22 6.47715 17.5228 2 12 2V4ZM13 10C13 10.5523 12.5523 11 12 11V13C13.6569 13 15 11.6569 15 10H13ZM12 11C11.4477 11 11 10.5523 11 10H9C9 11.6569 10.3431 13 12 13V11ZM11 10C11 9.44772 11.4477 9 12 9V7C10.3431 7 9 8.34315 9 10H11ZM12 9C12.5523 9 13 9.44772 13 10H15C15 8.34315 13.6569 7 12 7V9ZM8.01979 19.5988C8.22038 17.5785 9.92646 16 12 16V14C8.88819 14 6.33072 16.3681 6.02958 19.4012L8.01979 19.5988ZM12 16C14.0735 16 15.7796 17.5785 15.9802 19.5988L17.9704 19.4012C17.6693 16.3681 15.1118 14 12 14V16Z" fill="${getRandomColor()}"></path> </g></svg>
+            <span class="review-name">${review.name}</span>
+            <span class="review-date">${reviewTimeIntoText}</span>
+            <span class="review-rating">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</span>
+        <div class="review-comment">${review.comment}</div>
+        </div>
+    `;
+    feedbackContainer.appendChild(reviewDiv); // додаємо **тільки цей відгук**
+}
+
+const contactBtn = document.getElementById('contact_btn');
+const filterBg = document.createElement('div');
+filterBg.className = 'filter-bg';
+document.body.appendChild(filterBg);
+
+// CSS-стилі
+Object.assign(filterBg.style, {
+  position: 'fixed',
+  top: '0',
+  left: '0',
+  width: '100%',
+  height: '100vh',
+  backgroundColor: 'rgba(0, 0, 0, 0.5)', // кінцевий колір
+  opacity: '0',            // початково прозорий
+  transition: 'opacity 0.3s ease',
+  pointerEvents: 'none',   // не клікабельний поки невидимий
+  zIndex: '1000'
+});
+
+// при кліку показуємо
+contactBtn.addEventListener('click', () => {
+  filterBg.style.pointerEvents = 'auto';
+  filterBg.style.opacity = '1'; // плавне з’явлення
+});
+
+// якщо хочеш сховати при кліку на фільтр
+filterBg.addEventListener('click', () => {
+  filterBg.style.opacity = '0';
+  filterBg.style.pointerEvents = 'none';
 });
