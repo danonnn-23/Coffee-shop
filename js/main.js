@@ -1,3 +1,5 @@
+// Плавний скролл до секції
+
 document.querySelectorAll('[data-scroll]').forEach(item => {
   item.addEventListener('click', function() {
     const targetId = this.getAttribute('data-scroll');
@@ -7,6 +9,8 @@ document.querySelectorAll('[data-scroll]').forEach(item => {
     }
   });
 });
+
+// Масив з продуктами
 
 let products = [
     {
@@ -425,6 +429,8 @@ let products = [
     }
 ];
 
+// Масив з відгуками
+
 let reviews = [
     {
         name: "John Doe",
@@ -528,6 +534,8 @@ let reviews = [
     }
 ];
 
+// Відображення відгуків на сторінці
+
 const feedbackContainer = document.querySelector('.reviews');
 
 reviews.forEach(review => {
@@ -582,6 +590,8 @@ reviews.forEach(review => {
     `;
     feedbackContainer.appendChild(reviewDiv);
 });
+
+// Публікація нового відгуку
 
 const stars = document.querySelectorAll(".star");
 let selectedRating = 0;
@@ -646,6 +656,7 @@ submitButton.addEventListener('click', () => {
     }
 });
 
+// Відображення нового відгуку на сторінці
 
 function renderReview(review) {
     const reviewDiv = document.createElement('div');
@@ -678,6 +689,8 @@ function renderReview(review) {
     feedbackContainer.appendChild(reviewDiv); // додаємо **тільки цей відгук**
 }
 
+// Відображення контактної інформації при кліку на кнопку
+
 const contactBtn = document.getElementById('contact_btn');
 const filterBg = document.createElement('div');
 filterBg.className = 'filter-bg';
@@ -685,26 +698,94 @@ document.body.appendChild(filterBg);
 
 // CSS-стилі
 Object.assign(filterBg.style, {
-  position: 'fixed',
-  top: '0',
-  left: '0',
-  width: '100%',
-  height: '100vh',
-  backgroundColor: 'rgba(0, 0, 0, 0.5)', // кінцевий колір
-  opacity: '0',            // початково прозорий
-  transition: 'opacity 0.3s ease',
-  pointerEvents: 'none',   // не клікабельний поки невидимий
-  zIndex: '1000'
+    position: 'fixed',
+    top: '0',
+    left: '0',
+    width: '100%',
+    height: '100vh',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // кінцевий колір
+    opacity: '0',            // початково прозорий
+    transition: 'opacity 0.3s ease',
+    pointerEvents: 'none',   // не клікабельний поки невидимий
+    zIndex: '1000'
 });
 
-// при кліку показуємо
+const contactsDiv = document.createElement('div');
+contactsDiv.className = 'contacts-div';
+document.body.appendChild(contactsDiv);
+
+// CSS-стилі
+Object.assign(contactsDiv.style, {
+    position: 'fixed',
+    top: '-20%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)', // центр по горизонталі і вертикалі
+    width: '40vw',
+    height: '35vh',
+    backgroundColor: 'rgba(216, 216, 216, 1)',
+    opacity: '0',
+    transition: 'all 0.3s ease',
+    pointerEvents: 'none',
+    zIndex: '1100',
+    borderRadius: '10px'
+});
+
+contactsDiv.innerHTML = `
+    <svg class="close-contacts" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6 6L18 18M18 6L6 18" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+    <h2 class="contacts-banner">Contacts</h2>
+    <hr>
+    <p class="contacts-message">Please send an email to the address below if you have any questions or suggestions.</p>
+    <input class="form-control email-copy" type="text" value="tolochkodan.work@gmail.com" aria-label="Disabled input example" disabled readonly>
+    <hr>
+    <button id="gmail-btn" type="button" class="btn btn-primary">Primary</button>
+    `
+
+const gmailBtn = document.getElementById('gmail-btn');
+gmailBtn.addEventListener('click', () => {
+    const email = 'tolochkodan.work@gmail.com';
+    const subject = 'Question';
+    const body = 'Hello!';
+    
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    // відкриваємо у popup
+    window.open(
+        gmailUrl,
+        '_blank',
+        'width=800,height=600,scrollbars=yes,resizable=yes'
+    );
+});
+
 contactBtn.addEventListener('click', () => {
-  filterBg.style.pointerEvents = 'auto';
-  filterBg.style.opacity = '1'; // плавне з’явлення
+    // фон
+    filterBg.style.pointerEvents = 'auto';
+    filterBg.style.opacity = '1';
+
+    // блок контактів
+    contactsDiv.style.pointerEvents = 'auto';
+    contactsDiv.style.opacity = '1';
+    contactsDiv.style.top = '20%';
+    document.body.style.overflow = 'hidden';
 });
 
-// якщо хочеш сховати при кліку на фільтр
-filterBg.addEventListener('click', () => {
-  filterBg.style.opacity = '0';
-  filterBg.style.pointerEvents = 'none';
-});
+const closeContactsBtn = document.querySelector(".close-contacts");
+
+function closeContacts() {
+    // фон
+    filterBg.style.opacity = '0';
+    filterBg.style.pointerEvents = 'none';
+
+    // блок контактів
+    contactsDiv.style.opacity = '0';
+    contactsDiv.style.pointerEvents = 'none';
+    contactsDiv.style.top = '-20%';
+    document.body.style.overflow = 'auto';
+}
+
+// клік по фону
+filterBg.addEventListener('click', closeContacts);
+
+// клік по кнопці закриття
+closeContactsBtn.addEventListener('click', closeContacts);
+
+
