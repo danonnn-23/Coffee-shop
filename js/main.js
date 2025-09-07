@@ -737,8 +737,31 @@ contactsDiv.innerHTML = `
     <p class="contacts-message">Please send an email to the address below if you have any questions or suggestions.</p>
     <input class="form-control email-copy" type="text" value="tolochkodan.work@gmail.com" aria-label="Disabled input example" disabled readonly>
     <hr>
-    <button id="gmail-btn" type="button" class="btn btn-primary">Primary</button>
+    <div class="contacts-buttons">
+        <button id="copy-mail-btn" type="button" class="btn btn-outline-secondary">Copy email</button>
+        <button id="gmail-btn" type="button" class="btn btn-primary">Send a message</button>
+    </div>
     `
+
+Object.assign(contactsDiv.querySelector('.contacts-buttons').style, {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    gap: '10px',
+    marginRight: '3%'
+});
+
+const copyBtn = document.getElementById('copy-mail-btn');
+const emailInput = document.querySelector('.email-copy');
+
+copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(emailInput.value)
+        .then(() => {
+            alert('Email скопійовано у буфер обміну!');
+        })
+        .catch(err => {
+            console.error('Помилка копіювання: ', err);
+        });
+});
 
 const gmailBtn = document.getElementById('gmail-btn');
 gmailBtn.addEventListener('click', () => {

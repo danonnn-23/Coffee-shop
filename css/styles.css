@@ -230,6 +230,7 @@ body {
     padding: 15px;
     border-radius: 12px;
     margin-bottom: 15px;
+    overflow-x: hidden;
 }
 /* Елементи по зонах */
 .avatar {
@@ -405,3 +406,6 @@ body {
     margin-right: 3%;
     font-size: 105%;
 }
+
+
+
