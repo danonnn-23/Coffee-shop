@@ -13,12 +13,16 @@ body {
 }
 
 .main-header {
+    position: fixed;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 10vh;
     font-size: 125%;
     font-weight: 600;
+    transition: all 0.5s ease;
+    background-color: rgba(179, 157, 116, 0.7);
 }
 
 .header-logo {
@@ -37,6 +41,7 @@ body {
     display: flex;
     gap: 30px;
     margin-right: 5vw;
+    margin-bottom: 0px;
     height: 100%;
     display: flex;
     align-items: center;
@@ -308,13 +313,23 @@ body {
 .btn-submit {
     background-color: rgb(73, 49, 26);
     border-color: rgb(44, 29, 16);
-    box-shadow: none !important;
+    color: #fff;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .btn-submit:hover {
     background-color: rgb(53, 37, 14);
     border-color: rgb(33, 23, 10);
 }
+
+/* тут не чіпаємо колір! */
+.btn-submit:focus,
+.btn-submit:active,
+.btn-submit:focus:active {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
 
 
 .form-label {
@@ -343,31 +358,41 @@ body {
     /* видаліть padding тут */
 }
 
-.category-img {
-    width: 25vw;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
-    transition: all 0.3s ease;
-    cursor: pointer;
+.categories {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.category-img:hover {
-    transform: scale(1.05); 
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.7);
-}
-
-.categories-list {
+.categ-list {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    gap: 20px;
+    gap: 2vw;
 }
 
-.category-name {
-    padding-top: 3vh;
+.categ-list li {
+    width: 20vw;
+    background-color: #6b5242;
+    padding: 2vh 1vw 1vh 1vw;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    text-align: center;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
+}
+
+.categ-list li p {
+    margin-top: 2vh;
+    font-size: 120%;
+}
+
+.categ-list li:hover {
+    background-color: #856551;
+}
+
+.categ-btn-img {
+    width: 10vw;
 }
 
 .close-contacts {

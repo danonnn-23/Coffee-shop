@@ -12,21 +12,21 @@
     <title>Coffee shop</title>
 </head>
 <body>
+    <header class="main-header" id="nav-bar">
+        <img class="header-logo" src="./images/coffee shop logo.webp" alt="">
+        <nav class="main-nav">
+            <ul>
+                <li data-scroll="home">Home</li>
+                <li data-scroll="blog">Blog</li>
+                <li data-scroll="about">About</li>
+                <li data-scroll="feedback">Feedback</li>
+                <li data-scroll="contact" id="contact_btn">Contact</li>
+                <li data-scroll="shop" class="nav-btn-buyNow">Buy now</li>
+            </ul>
+        </nav>
+    </header>
     <header>
         <div id="home" class="header-container">
-            <header class="main-header">
-                <img class="header-logo" src="./images/coffee shop logo.webp" alt="">
-                <nav class="main-nav">
-                    <ul>
-                        <li data-scroll="home">Home</li>
-                        <li data-scroll="blog">Blog</li>
-                        <li data-scroll="about">About</li>
-                        <li data-scroll="feedback">Feedback</li>
-                        <li data-scroll="contact" id="contact_btn">Contact</li>
-                        <li data-scroll="shop" class="nav-btn-buyNow">Buy now</li>
-                    </ul>
-                </nav>
-            </header>
             <div class="hero-section">
                 <h1 class="motto">Freshly Roasted Coffee Delivered to Your Door</h1>
                 <p class="description">Experience the rich aroma and bold flavors of our premium coffee blends, sourced from the finest beans around the world.</p>
@@ -50,24 +50,21 @@
     </div>
     <div class="shop-bg" id="shop">
         <div class="shop-container">
-            <div class="choose-category">
-                <h2>Choose your category</h2>
-                <div class="categories-btns">
-                    <ul class="categories-list">
-                        <li class="category-coffee">
-                            <img class="category-img" src="./images/categoty_coffee.webp" alt="Coffee image">
-                            <h3 class="category-name">Coffee</h3>
-                        </li>
-                        <li>
-                            <img class="category-img" src="./images/category_coffee_accesories.webp" alt="Coffee accesories image">
-                            <h3 class="category-name">Coffee accesories</h3>
-                        </li>
-                        <li>
-                            <img class="category-img" src="./images/category_tea.webp" alt="Tea image">
-                            <h3 class="category-name">Tea</h3>
-                        </li>
-                    </ul>
-                </div>
+            <div class="categories">
+                <ul class="categ-list">
+                    <li class="categ-coffee-li">
+                        <img class="categ-btn-img" src="./images/Coffee categ pic.png" alt="Coffee category picture">
+                        <p>Coffee</p>
+                    </li>
+                    <li class="categ-coffee-accesories-li">
+                        <img class="categ-btn-img" src="./images/Coffee accesories categ pic.png" alt="Coffee accesories category picutre">
+                        <p>Coffee accesories</p>
+                    </li>
+                    <li class="categ-tea-li">
+                        <img class="categ-btn-img" src="./images/Tea categ pic.png" alt="Tea category picture">
+                        <p>Tea</p>
+                    </li>
+                </ul>
             </div>
         </div>
 

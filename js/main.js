@@ -811,4 +811,19 @@ filterBg.addEventListener('click', closeContacts);
 // клік по кнопці закриття
 closeContactsBtn.addEventListener('click', closeContacts);
 
+// Stroll
 
+const navBar = document.getElementById("nav-bar");
+let lastScrollTop = 0;
+
+window.addEventListener("scroll", function() {
+  let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+  if (currentScroll > lastScrollTop) {
+    navBar.style.transform = "translateY(-300px)"
+  } else if (currentScroll < lastScrollTop) {
+    navBar.style.transform = "translateY(0px)"
+  }
+
+  lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // не даємо піти в мінус
+}, false);
