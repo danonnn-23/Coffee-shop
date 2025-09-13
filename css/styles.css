@@ -17,13 +17,13 @@ body {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    height: 10vh;
+    justify-content: center;
+    height: 8vh;
     font-size: 125%;
     font-weight: 600;
     transition: all 0.5s ease;
-    background-color: rgba(179, 157, 116, 0.7);
-}
+    margin-top: 1vh; 
+}  
 
 .header-logo {
     height: 75%;
@@ -35,6 +35,8 @@ body {
     height: 100%;
     display: flex;
     align-items: center;
+    background-color: rgb(179, 157, 116);
+    border-radius: 35px;
 }
 
 .main-nav ul {
