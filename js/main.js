@@ -750,18 +750,53 @@ Object.assign(contactsDiv.querySelector('.contacts-buttons').style, {
     marginRight: '3%'
 });
 
-const copyBtn = document.getElementById('copy-mail-btn');
-const emailInput = document.querySelector('.email-copy');
 
-copyBtn.addEventListener('click', () => {
+const copyBtn = document.getElementById('copy-mail-btn');
+  const emailInput = document.querySelector('.email-copy');
+
+  copyBtn.addEventListener('click', () => {
     navigator.clipboard.writeText(emailInput.value)
-        .then(() => {
-            alert('Email скопійовано у буфер обміну!');
-        })
-        .catch(err => {
-            console.error('Помилка копіювання: ', err);
-        });
-});
+      .then(() => {
+        const oldText = copyBtn.innerHTML;
+
+        // вставляємо гіфку
+        copyBtn.innerHTML = '<img src="https://i.gifer.com/ZZ5H.gif" alt="loading" style="height:20px;">';
+
+        // через 1.2 сек запускаємо "друкарську машинку"
+        setTimeout(() => {
+          const text = '✅ Copied!';
+          copyBtn.innerHTML = ''; // очистка перед друком
+          let i = 0;
+
+          const typeInterval = setInterval(() => {
+            copyBtn.innerHTML += text[i];
+            i++;
+            if (i === text.length) {
+              clearInterval(typeInterval);
+            }
+          }, 100); // швидкість друку (100мс на букву)
+        }, 1200);
+
+        // повернення старого тексту через 2.7 сек після кліку
+        setTimeout(() => {
+          const text = oldText;
+          copyBtn.innerHTML = ''; // очистка перед друком
+          let i = 0;
+
+          const typeInterval = setInterval(() => {
+            copyBtn.innerHTML += text[i];
+            i++;
+            if (i === text.length) {
+              clearInterval(typeInterval);
+            }
+          }, 100); // швидкість друку (100мс на букву)
+        }, 4000);
+
+      })
+      .catch(err => {
+        console.error('Error copy: ', err);
+      });
+  });
 
 const gmailBtn = document.getElementById('gmail-btn');
 gmailBtn.addEventListener('click', () => {
